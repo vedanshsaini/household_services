@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Payment Successful</h2>
+  <p>Thank you for your order!</p>
+  <p>Service: {{ order.service.name }}</p>
+  <p>Fee: {{ order.service.fee }}</p>
+{% endblock %}

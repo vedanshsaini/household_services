@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Place Order</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <h3>Services</h3>
+    <ul>
+      {% for service in services %}
+        <li>
+          <input type="radio" name="service" value="{{ service.id }}"> {{ service.name }} - {{ service.fee }}
+        </li>
+      {% endfor %}
+    </ul>
+    <button type="submit">Place Order</button>
+  </form>
+{% endblock %}
