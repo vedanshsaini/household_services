@@ -1,10 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  <style>
+    /* CSS for household services */
+    .service-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .service-item {
+      border-bottom: 1px solid #ccc;
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .service-name {
+      font-weight: bold;
+    }
+
+    .service-fee {
+      color: #777;
+    }
+  </style>
+
   <h2>Household Services</h2>
-  <ul>
+  <ul class="service-list">
     {% for service in services %}
-      <li>{{ service.name }} - {{ service.fee }}</li>
+      <li class="service-item">
+        <div class="service-name">{{ service.name }}</div>
+        <div class="service-fee">${{ service.fee }}</div>
+      </li>
     {% endfor %}
   </ul>
 {% endblock %}
