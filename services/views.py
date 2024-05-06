@@ -19,19 +19,20 @@ def list_services(request):
     return render(request, 'services/services.html', {'services': services})
 
 from django.contrib.auth.models import User
-
 def place_order(request):
     services = Service.objects.all()
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
+            print("request.user", request.user)
             order.user = User.objects.get(pk=request.user.pk)  # Casting to User object
             order.save()
             return redirect('process_payment', order.id)
     else:
         form = OrderForm()
     return render(request, 'services/place_order.html', {'form': form, 'services': services})
+
 
 
 def process_payment(request, order_id):

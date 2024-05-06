@@ -1,18 +1,68 @@
 {% extends 'base.html' %}
-
 {% block content %}
-  <h2 style="font-family: Arial, sans-serif;">Place Order</h2>
-  <form method="post" style="margin-bottom: 20px;">
+<style>
+    h2 {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    form {
+        background-color: #f9f9f9;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+    }
+
+    li input[type="radio"] {
+        margin-right: 10px;
+    }
+
+    button[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        display: block;
+        margin: 0 auto;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<h2>Place Order</h2>
+<form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <h3>Services</h3>
-    <ul style="list-style-type: none; padding: 0;">
-      {% for service in services %}
-        <li style="margin-bottom: 10px;">
-          <input type="radio" name="service" value="{{ service.id }}"> {{ service.name }} - {{ service.fee }}
+    <ul>
+        {% for service in services %}
+        <li>
+            <input type="radio" name="service" value="{{ service.id }}">
+            {{ service.name }} - {{ service.fee }}
         </li>
-      {% endfor %}
+        {% endfor %}
     </ul>
-    <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Place Order</button>
-  </form>
+    <button type="submit">Place Order</button>
+</form>
 {% endblock %}
